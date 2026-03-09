@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { StorageService } from '../core/services/storage';
+import { StorageService } from '../core/service/storage';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',

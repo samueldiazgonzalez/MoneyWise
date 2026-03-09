@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { Transaccion } from '../../../core/model/transaccion';
+import { Router } from '@angular/router';
 import { TransaccionService } from '../../../core/service/transaccion';
+import { Transaccion } from '../../../core/model/transaccion';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-form-transaccion',

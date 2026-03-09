@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { TransaccionService } from '../../../core/service/transaccion';
+import { Transaccion } from '../../../core/model/transaccion';
 import { ModalController } from '@ionic/angular';
 import { TransactionDetailComponent } from 'src/app/shared/component/transaction-detail/transaction-detail.component';
-import { Transaccion } from '../../../core/model/transaccion';
-import { TransaccionService } from '../../../core/service/transaccion';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lista-transacciones',

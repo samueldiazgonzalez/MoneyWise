@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Chart } from 'chart.js/auto';
-import { Transaccion } from '../../../core/model/transaccion';
-import { StorageService } from '../../../core/service/storage';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { TransaccionService } from '../../../core/service/transaccion';
+import { Transaccion } from '../../../core/model/transaccion';
+import { Chart } from 'chart.js/auto';
+import { Router } from '@angular/router';
+import { StorageService } from '../../../core/service/storage';
 
 @Component({
   selector: 'app-dashboard',

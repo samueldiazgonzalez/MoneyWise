@@ -1,15 +1,14 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
-import { FilterBarComponent } from './components/filter-bar/filter-bar.component';
+import { FilterBarComponent } from './component/filter-bar/filter-bar.component';
 
-import { FilterByTypePipe } from './pipes/filter-by-type-pipe';
-import { FilterByCategoryPipe } from './pipes/filter-by-category-pipe';
-import { SearchByTextPipe } from './pipes/search-by-text-pipe';
-import { TransactionDetailComponent } from './components/transaction-detail/transaction-detail.component';
+import { TransactionDetailComponent } from './component/transaction-detail/transaction-detail.component';
+import { FilterByCategoryPipe } from './pipe/filter-by-category-pipe';
+import { FilterByTypePipe } from './pipe/filter-by-type-pipe';
+import { SearchByTextPipe } from './pipe/search-by-text-pipe';
 
 @NgModule({
   declarations: [
