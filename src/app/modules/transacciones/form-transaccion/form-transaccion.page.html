@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Nueva Transacción</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+<ion-item>
+  <ion-label>Tipo</ion-label>
+  <ion-segment [(ngModel)]="tipo">
+    <ion-segment-button value="ingreso">
+      Ingreso
+    </ion-segment-button>
+    <ion-segment-button value="gasto">
+      Gasto
+    </ion-segment-button>
+  </ion-segment>
+</ion-item>
+
+<ion-item>
+  <ion-label>Categoría</ion-label>
+
+  <ion-select [(ngModel)]="categoria" placeholder="Selecciona">
+
+    <ion-select-option
+      *ngFor="let c of categorias"
+      [value]="c">
+
+      {{c}}
+
+    </ion-select-option>
+
+  </ion-select>
+
+</ion-item>
+
+<ion-item>
+  <ion-input
+    type="number"
+    label="Monto"
+    placeholder="0"
+    [(ngModel)]="monto">
+  </ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-textarea
+    label="Descripción"
+    placeholder="Opcional"
+    [(ngModel)]="descripcion">
+  </ion-textarea>
+</ion-item>
+
+<ion-item>
+  <ion-button expand="block" (click)="tomarFoto()">
+
+  <ion-icon slot="start" name="camera"></ion-icon>
+  Agregar comprobante
+
+</ion-button>
+</ion-item>
+<img
+  *ngIf="comprobante"
+  [src]="comprobante"
+  style="width:100%; margin-top:10px; border-radius:10px;">
+
+<ion-button expand="block" color="success" (click)="guardar()">
+  Guardar Transacción
+</ion-button>
+
+</ion-content>

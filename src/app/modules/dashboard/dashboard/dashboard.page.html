@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-title>Dashboard</ion-title>
+
+    <ion-buttons slot="end">
+
+      <ion-button color="danger" (click)="logout()">
+
+        <ion-icon name="exit" slot="start"></ion-icon>
+
+      </ion-button>
+
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Saldo Actual</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    {{saldo}}
+  </ion-card-content>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Ingresos</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    {{ingresos}}
+  </ion-card-content>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Gastos</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    {{gastos}}
+  </ion-card-content>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Gastos por Categoría</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+
+    <canvas id="graficaPastel"></canvas>
+
+  </ion-card-content>
+</ion-card>
+
+</ion-content>
+<ion-footer>
+  <ion-tabs>
+
+  <ion-tab-bar slot="bottom">
+
+    <ion-tab-button tab="dashboard">
+      <ion-icon name="home-outline"></ion-icon>
+      <ion-label>Dashboard</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="transacciones">
+      <ion-icon name="list-outline"></ion-icon>
+      <ion-label>Transacciones</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="agregar">
+      <ion-icon name="add-circle-outline"></ion-icon>
+      <ion-label>Agregar</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="perfil">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label>Perfil</ion-label>
+    </ion-tab-button>
+
+  </ion-tab-bar>
+
+</ion-tabs>
+</ion-footer>
+

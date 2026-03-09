@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detalle</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrar()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+<ion-card>
+
+  <ion-card-header>
+    <ion-card-title>{{transaccion.getCategoria()}}</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+
+    <ion-item>
+      <ion-label>Tipo</ion-label>
+      <ion-badge
+      [color]="transaccion.getTipo() === 'ingreso' ? 'success' : 'danger'">
+        {{transaccion.getTipo()}}
+      </ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Descripción</ion-label>
+      <p>{{transaccion.getDescripcion()}}</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Monto</ion-label>
+      <p>{{transaccion.getMonto() | currency}}</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Fecha</ion-label>
+      <p>{{transaccion.getFecha() | date}}</p>
+    </ion-item>
+
+    <img
+    *ngIf="transaccion.getComprobante()"
+    [src]="transaccion.getComprobante()"
+    style="width:100%; border-radius:10px; margin-top:10px">
+
+  </ion-card-content>
+
+</ion-card>
+
+</ion-content>

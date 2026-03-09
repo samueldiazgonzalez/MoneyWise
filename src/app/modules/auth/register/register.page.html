@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+<div class="login-container">
+
+  <ion-card>
+
+    <ion-card-header class="ion-text-center">
+      <ion-card-title>Crear Cuenta</ion-card-title>
+      <ion-card-subtitle>Empieza a gestionar tu dinero</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <ion-item>
+        <ion-input
+          label="Nombre"
+          labelPlacement="floating"
+          [(ngModel)]="nombre">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          label="Email"
+          labelPlacement="floating"
+          [(ngModel)]="email">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          type="password"
+          label="Contraseña"
+          labelPlacement="floating"
+          [(ngModel)]="password">
+        </ion-input>
+      </ion-item>
+
+      <ion-button expand="block" class="ion-margin-top" (click)="register()">
+        Crear cuenta
+      </ion-button>
+
+      <div class="register-link">
+        <ion-text>
+          ¿Ya tienes cuenta?
+        </ion-text>
+
+        <ion-button fill="clear" routerLink="/auth/login">
+          Inicia sesión
+        </ion-button>
+      </div>
+
+    </ion-card-content>
+
+  </ion-card>
+
+</div>
+
+</ion-content>
