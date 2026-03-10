@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { TabsPage } from './tabs.page';
 
@@ -41,6 +41,12 @@ const routes: Routes = [
       loadChildren: () =>
         import('../transacciones/form-transaccion/form-transaccion.module')
         .then(m => m.FormTransaccionPageModule)
+    },
+    {
+      path: 'perfil',
+      loadChildren: () =>
+        import('../perfil/perfil.module')
+        .then(m => m.PerfilPageModule)
     }
 
   ]

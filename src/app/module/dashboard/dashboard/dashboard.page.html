@@ -85,6 +85,17 @@
 
   </ion-tab-bar>
 
+<ion-card-content>
+  {{ saldo | currency:'COP':'symbol-narrow':'1.0-0' }}
+</ion-card-content>
+
+<ion-card-content>
+  {{ ingresos | currency:'COP':'symbol-narrow':'1.0-0' }}
+</ion-card-content>
+
+<ion-card-content>
+  {{ gastos | currency:'COP':'symbol-narrow':'1.0-0' }}
+</ion-card-content>
 </ion-tabs>
 </ion-footer>
 

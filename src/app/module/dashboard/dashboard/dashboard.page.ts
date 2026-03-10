@@ -26,84 +26,117 @@ export class DashboardPage implements OnInit, AfterViewInit {
   ) {}
 
   async ngOnInit() {
-  await this.calcularResumen();
-
-  this.crearGrafica();
+    await this.calcularResumen();
+    this.crearGrafica();
   }
 
   async ngAfterViewInit() {
     await this.crearGrafica();
   }
 
-async calcularResumen(){
+  async calcularResumen(){
+    let transacciones: Transaccion[] =
+      await this.transaccionService.getTransaccionesUsuario() || [];
 
-  let transacciones: Transaccion[] =
-    await this.transaccionService.getTransaccionesUsuario() || [];
+    this.ingresos = 0;
+    this.gastos = 0;
 
-  this.ingresos = 0;
-  this.gastos = 0;
-
-  transacciones.forEach(t => {
-
-    if(t.getTipo() === 'ingreso'){
-      this.ingresos += t.getMonto();
-    }
-
-    if(t.getTipo() === 'gasto'){
-      this.gastos += t.getMonto();
-    }
-
-  });
-
-  this.saldo = this.ingresos - this.gastos;
-
-}
-
-async crearGrafica(){
-
-  let data = await this.transaccionService.getTransaccionesUsuario() || [];
-
-  let categorias: any = {};
-
-  data.forEach((t:any)=>{
-
-    if(t.getTipo() === 'gasto'){
-
-      if(!categorias[t.getCategoria()]){
-        categorias[t.getCategoria()] = 0;
+    transacciones.forEach(t => {
+      if(t.getTipo() === 'ingreso'){
+        this.ingresos += t.getMonto();
       }
 
-      categorias[t.getCategoria()] += t.getMonto();
+      if(t.getTipo() === 'gasto'){
+        this.gastos += t.getMonto();
+      }
+    });
 
-    }
-
-  });
-
-  const labels = Object.keys(categorias);
-  const valores = Object.values(categorias);
-
-  if(this.chart){
-    this.chart.destroy();
+    this.saldo = this.ingresos - this.gastos;
   }
 
-  this.chart = new Chart("graficaPastel", {
-    type: 'pie',
-    data: {
-      labels: labels,
-      datasets: [{
-        data: valores
-      }]
-    }
-  });
+  async crearGrafica(){
+    let data = await this.transaccionService.getTransaccionesUsuario() || [];
+    let categorias: any = {};
 
-}
+    data.forEach((t:any)=>{
+      if(t.getTipo() === 'gasto'){
+        if(!categorias[t.getCategoria()]){
+          categorias[t.getCategoria()] = 0;
+        }
+        categorias[t.getCategoria()] += t.getMonto();
+      }
+    });
+
+    const labels = Object.keys(categorias);
+    const valores = Object.values(categorias);
+
+    if(this.chart){
+      this.chart.destroy();
+    }
+
+    const coloresBancolombia = [
+      '#FDDA24', // Amarillo
+      '#1C1C1C', // Negro
+      '#00D084', // Verde
+      '#FF3B30', // Rojo
+      '#007AFF', // Azul
+      '#FF9500', // Naranja
+      '#5856D6', // Morado
+      '#34C759'  // Verde claro
+    ];
+
+    this.chart = new Chart("graficaPastel", {
+      type: 'pie',
+      data: {
+        labels: labels,
+        datasets: [{
+          data: valores,
+          backgroundColor: coloresBancolombia,
+          borderWidth: 3,
+          borderColor: '#ffffff',
+          hoverOffset: 15
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              padding: 15,
+              font: {
+                size: 13,
+                weight: 'bold' as any
+              },
+              usePointStyle: true,
+              pointStyle: 'circle'
+            }
+          },
+          tooltip: {
+            backgroundColor: '#1C1C1C',
+            titleColor: '#FDDA24',
+            bodyColor: '#ffffff',
+            padding: 12,
+            cornerRadius: 8,
+            displayColors: true,
+            callbacks: {
+              label: function(context: any) {
+                return ' $' + context.parsed.toLocaleString('es-CO');
+              }
+            }
+          }
+        }
+      }
+    });
+
+    const canvas = document.getElementById('graficaPastel') as HTMLCanvasElement;
+    if(canvas) canvas.classList.add('chart-rendered');
+  }
 
   logout(){
-
     this.storage.remove('session');
-
     this.router.navigate(['/auth/login']);
-
   }
 
 }

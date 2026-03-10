@@ -1,0 +1,181 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mi Perfil</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="settings-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- TARJETA DE PERFIL PRINCIPAL -->
+  <ion-card class="profile-card">
+    <ion-card-content>
+      <div class="profile-header">
+        <div class="avatar-container">
+          <ion-avatar class="profile-avatar">
+            <ion-icon name="person"></ion-icon>
+          </ion-avatar>
+          <ion-button fill="clear" class="edit-avatar-btn">
+            <ion-icon name="camera" slot="icon-only"></ion-icon>
+          </ion-button>
+        </div>
+        
+        <div class="profile-info">
+          <h2 class="profile-name">{{ nombreUsuario }}</h2>
+          <p class="profile-email">{{ emailUsuario }}</p>
+          <ion-chip class="membership-chip">
+            <ion-icon name="star"></ion-icon>
+            <ion-label>Miembro desde {{ fechaRegistro }}</ion-label>
+          </ion-chip>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- ESTADÍSTICAS RÁPIDAS -->
+  <div class="stats-grid">
+    <ion-card class="stat-card">
+      <ion-card-content>
+        <ion-icon name="trending-up" class="stat-icon success"></ion-icon>
+        <div class="stat-info">
+          <p class="stat-label">Total Ingresos</p>
+          <h3 class="stat-value success">{{ totalIngresos | currency:'COP':'symbol-narrow':'1.0-0' }}</h3>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="stat-card">
+      <ion-card-content>
+        <ion-icon name="trending-down" class="stat-icon danger"></ion-icon>
+        <div class="stat-info">
+          <p class="stat-label">Total Gastos</p>
+          <h3 class="stat-value danger">{{ totalGastos | currency:'COP':'symbol-narrow':'1.0-0' }}</h3>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- INFORMACIÓN PERSONAL -->
+  <ion-card class="info-card">
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="information-circle-outline"></ion-icon>
+        Información Personal
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list lines="none">
+        <ion-item>
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+          <ion-label>
+            <p>Nombre completo</p>
+            <h3>{{ nombreUsuario }}</h3>
+          </ion-label>
+          <ion-button fill="clear" slot="end">
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+          <ion-label>
+            <p>Correo electrónico</p>
+            <h3>{{ emailUsuario }}</h3>
+          </ion-label>
+          <ion-button fill="clear" slot="end">
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="call-outline" slot="start"></ion-icon>
+          <ion-label>
+            <p>Teléfono</p>
+            <h3>{{ telefono || 'No registrado' }}</h3>
+          </ion-label>
+          <ion-button fill="clear" slot="end">
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- TRANSACCIONES RECIENTES -->
+  <ion-card class="transactions-card">
+    <ion-card-header>
+      <div class="card-header-flex">
+        <ion-card-title>
+          <ion-icon name="receipt-outline"></ion-icon>
+          Transacciones Recientes
+        </ion-card-title>
+        <ion-button fill="clear" size="small" routerLink="/tabs/transacciones">
+          Ver todas
+          <ion-icon name="arrow-forward" slot="end"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list lines="none">
+        <ion-item *ngFor="let transaccion of transaccionesRecientes" class="transaction-item">
+          <div class="transaction-icon" [class.ingreso]="transaccion.tipo === 'ingreso'" [class.gasto]="transaccion.tipo === 'gasto'" slot="start">
+            <ion-icon [name]="transaccion.tipo === 'ingreso' ? 'arrow-down' : 'arrow-up'"></ion-icon>
+          </div>
+          
+          <ion-label>
+            <h3>{{ transaccion.categoria }}</h3>
+            <p>{{ transaccion.fecha | date:'dd/MM/yyyy' }}</p>
+          </ion-label>
+
+          <div class="transaction-amount" slot="end">
+            <h3 [class.ingreso]="transaccion.tipo === 'ingreso'" [class.gasto]="transaccion.tipo === 'gasto'">
+              {{ transaccion.tipo === 'ingreso' ? '+' : '-' }}{{ transaccion.monto | currency:'COP':'symbol-narrow':'1.0-0' }}
+            </h3>
+          </div>
+        </ion-item>
+
+        <!-- Estado vacío -->
+        <div *ngIf="transaccionesRecientes.length === 0" class="empty-state">
+          <ion-icon name="receipt-outline"></ion-icon>
+          <p>No hay transacciones recientes</p>
+        </div>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- OPCIONES ADICIONALES -->
+  <ion-card class="options-card">
+    <ion-list lines="none">
+      <ion-item button detail>
+        <ion-icon name="notifications-outline" slot="start"></ion-icon>
+        <ion-label>Notificaciones</ion-label>
+      </ion-item>
+
+      <ion-item button detail>
+        <ion-icon name="shield-checkmark-outline" slot="start"></ion-icon>
+        <ion-label>Seguridad</ion-label>
+      </ion-item>
+
+      <ion-item button detail>
+        <ion-icon name="help-circle-outline" slot="start"></ion-icon>
+        <ion-label>Ayuda y soporte</ion-label>
+      </ion-item>
+
+      <ion-item button detail lines="full">
+        <ion-icon name="document-text-outline" slot="start"></ion-icon>
+        <ion-label>Términos y condiciones</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <!-- BOTÓN DE CERRAR SESIÓN -->
+  <ion-button expand="block" color="danger" class="logout-btn" (click)="logout()">
+    <ion-icon name="log-out-outline" slot="start"></ion-icon>
+    Cerrar sesión
+  </ion-button>
+
+</ion-content>

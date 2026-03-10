@@ -1,0 +1,438 @@
+// ===================================
+// MONEYWISE DASHBOARD - ESTILO BANCOLOMBIA
+// Inspirado en la app de Bancolombia
+// ===================================
+
+// Variables de color Bancolombia
+$bancolombia-yellow: #FDDA24;
+$bancolombia-dark: #1C1C1C;
+$bancolombia-gray: #F5F5F5;
+$bancolombia-text: #333333;
+$bancolombia-light-gray: #E8E8E8;
+$success-green: #00D084;
+$danger-red: #FF3B30;
+$card-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+
+// ===================================
+// HEADER / TOOLBAR
+// ===================================
+ion-header {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  
+  ion-toolbar {
+    --background: $bancolombia-dark;
+    --color: white;
+    --padding-top: 8px;
+    --padding-bottom: 8px;
+    
+    ion-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+    
+    ion-button {
+      --color: $bancolombia-yellow;
+      font-weight: 600;
+      
+      ion-icon {
+        font-size: 24px;
+      }
+      
+      &:hover {
+        --background: rgba(253, 218, 36, 0.1);
+      }
+    }
+  }
+}
+
+// ===================================
+// CONTENIDO PRINCIPAL
+// ===================================
+ion-content {
+  --background: $bancolombia-gray;
+  --padding-top: 0;
+  --padding-bottom: 0;
+}
+
+// ===================================
+// TARJETAS PRINCIPALES
+// ===================================
+ion-card {
+  border-radius: 16px;
+  box-shadow: $card-shadow;
+  margin: 16px;
+  background: white;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  
+  &:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+  }
+  
+  // Primera tarjeta - Saldo (destacada)
+  &:first-child {
+    background: linear-gradient(135deg, $bancolombia-dark 0%, #2d2d2d 100%);
+    color: white;
+    margin-top: 20px;
+    position: relative;
+    overflow: hidden;
+    
+    // Detalle amarillo característico
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 100%;
+      background: $bancolombia-yellow;
+    }
+    
+    ion-card-header {
+      padding: 20px 20px 12px 26px;
+      
+      ion-card-title {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.95rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+    }
+    
+    ion-card-content {
+      padding: 0 20px 24px 26px;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      
+      &::before {
+        content: '$';
+        font-size: 1.8rem;
+        color: $bancolombia-yellow;
+        font-weight: 600;
+      }
+    }
+  }
+  
+  // Segunda y tercera tarjeta - Ingresos y Gastos
+  &:nth-child(2),
+  &:nth-child(3) {
+    ion-card-header {
+      padding: 16px 20px 8px;
+      
+      ion-card-title {
+        color: $bancolombia-text;
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+    }
+    
+    ion-card-content {
+      padding: 8px 20px 20px;
+      font-size: 2rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      
+      &::before {
+        content: '$';
+        font-size: 1.4rem;
+        font-weight: 600;
+      }
+    }
+  }
+  
+  // Tarjeta de Ingresos (verde)
+  &:nth-child(2) {
+    border-left: 4px solid $success-green;
+    
+    ion-card-title::before {
+      content: '↑';
+      color: $success-green;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+    
+    ion-card-content {
+      color: $success-green;
+      
+      &::before {
+        color: $success-green;
+      }
+    }
+  }
+  
+  // Tarjeta de Gastos (roja)
+  &:nth-child(3) {
+    border-left: 4px solid $danger-red;
+    
+    ion-card-title::before {
+      content: '↓';
+      color: $danger-red;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+    
+    ion-card-content {
+      color: $danger-red;
+      
+      &::before {
+        color: $danger-red;
+      }
+    }
+  }
+  
+  // Tarjeta de Gráfica
+  &:nth-child(4) {
+    margin-bottom: 24px;
+    
+    ion-card-header {
+      padding: 20px;
+      background: linear-gradient(to right, $bancolombia-gray, white);
+      
+      ion-card-title {
+        color: $bancolombia-dark;
+        font-size: 1.1rem;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+      }
+    }
+    
+    ion-card-content {
+      padding: 24px 20px;
+      
+      canvas {
+        max-height: 280px;
+        margin: 0 auto;
+        display: block;
+      }
+    }
+  }
+}
+
+// ===================================
+// FOOTER / TAB BAR
+// ===================================
+ion-footer {
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  
+  ion-tab-bar {
+    --background: white;
+    border-top: 1px solid $bancolombia-light-gray;
+    height: 65px;
+    padding-bottom: 5px;
+    
+    ion-tab-button {
+      --color: #8E8E93;
+      --color-selected: $bancolombia-dark;
+      font-size: 0.7rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      
+      ion-icon {
+        font-size: 26px;
+        margin-bottom: 4px;
+        transition: all 0.3s ease;
+      }
+      
+      ion-label {
+        font-weight: 600;
+        margin-top: 4px;
+      }
+      
+      // Estado seleccionado
+      &.tab-selected {
+        --color-selected: $bancolombia-dark;
+        
+        ion-icon {
+          transform: scale(1.1);
+          color: $bancolombia-dark;
+        }
+        
+        ion-label {
+          color: $bancolombia-dark;
+          font-weight: 700;
+        }
+        
+        // Indicador amarillo superior
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 20%;
+          right: 20%;
+          height: 3px;
+          background: $bancolombia-yellow;
+          border-radius: 0 0 3px 3px;
+        }
+      }
+      
+      // Hover effect
+      &:hover:not(.tab-selected) {
+        --color: $bancolombia-dark;
+        
+        ion-icon {
+          transform: scale(1.05);
+        }
+      }
+      
+      // Tab de Agregar (botón central destacado)
+      &[tab="agregar"] {
+        position: relative;
+        
+        ion-icon {
+          font-size: 32px;
+          color: $bancolombia-yellow;
+          background: $bancolombia-dark;
+          border-radius: 50%;
+          padding: 8px;
+          margin-bottom: 2px;
+        }
+        
+        ion-label {
+          color: $bancolombia-dark;
+          font-weight: 700;
+        }
+        
+        &.tab-selected ion-icon {
+          background: $bancolombia-yellow;
+          color: $bancolombia-dark;
+          transform: scale(1.15);
+        }
+      }
+    }
+  }
+}
+
+// ===================================
+// ANIMACIONES
+// ===================================
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+ion-card {
+  animation: slideInUp 0.4s ease-out;
+  animation-fill-mode: both;
+  
+  &:nth-child(1) { animation-delay: 0.1s; }
+  &:nth-child(2) { animation-delay: 0.2s; }
+  &:nth-child(3) { animation-delay: 0.3s; }
+  &:nth-child(4) { animation-delay: 0.4s; }
+}
+
+// ===================================
+// RESPONSIVE - TABLETS
+// ===================================
+@media (min-width: 768px) {
+  ion-content {
+    --padding-start: 20px;
+    --padding-end: 20px;
+  }
+  
+  // Grid de 2 columnas para ingresos y gastos
+  .cards-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    padding: 0 16px;
+  }
+  
+  ion-card {
+    margin: 0;
+    
+    &:first-child {
+      grid-column: 1 / -1;
+      margin: 20px 0 16px;
+    }
+    
+    &:nth-child(4) {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+// ===================================
+// RESPONSIVE - MÓVILES PEQUEÑOS
+// ===================================
+@media (max-width: 360px) {
+  ion-card {
+    margin: 12px;
+    
+    &:first-child ion-card-content {
+      font-size: 2rem;
+    }
+    
+    &:nth-child(2) ion-card-content,
+    &:nth-child(3) ion-card-content {
+      font-size: 1.6rem;
+    }
+  }
+  
+  ion-footer ion-tab-bar {
+    height: 60px;
+    
+    ion-tab-button ion-icon {
+      font-size: 22px;
+    }
+  }
+}
+
+// ===================================
+// MEJORAS VISUALES ADICIONALES
+// ===================================
+
+// Separador visual entre secciones
+ion-card:nth-child(3)::after {
+  content: '';
+  display: block;
+  height: 1px;
+  background: linear-gradient(to right, transparent, $bancolombia-light-gray, transparent);
+  margin: 12px 0 0;
+}
+
+// Efecto de carga para el canvas
+canvas {
+  transition: opacity 0.3s ease;
+  
+  &:not(.chart-rendered) {
+    opacity: 0.5;
+  }
+}
+
+// Estado vacío (cuando no hay datos)
+.empty-state {
+  padding: 40px 20px;
+  text-align: center;
+  color: #8E8E93;
+  
+  ion-icon {
+    font-size: 64px;
+    color: $bancolombia-light-gray;
+    margin-bottom: 16px;
+  }
+  
+  p {
+    font-size: 1rem;
+    margin: 0;
+  }
+}

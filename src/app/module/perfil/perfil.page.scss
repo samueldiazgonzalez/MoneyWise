@@ -1,0 +1,558 @@
+// ===================================
+// PERFIL - ESTILOS PROFESIONALES BANCOLOMBIA
+// ===================================
+
+// Variables de color Bancolombia
+$bancolombia-yellow: #FDDA24;
+$bancolombia-dark: #1C1C1C;
+$bancolombia-gray: #F5F5F5;
+$bancolombia-text: #333333;
+$bancolombia-light-gray: #E8E8E8;
+$success-green: #00D084;
+$danger-red: #FF3B30;
+$info-blue: #007AFF;
+$card-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+
+// ===================================
+// HEADER
+// ===================================
+ion-header {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  
+  ion-toolbar {
+    --background: $bancolombia-dark;
+    --color: white;
+    
+    ion-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+    
+    ion-button {
+      --color: $bancolombia-yellow;
+      
+      ion-icon {
+        font-size: 24px;
+      }
+    }
+  }
+}
+
+// ===================================
+// CONTENIDO PRINCIPAL
+// ===================================
+ion-content {
+  --background: $bancolombia-gray;
+}
+
+// ===================================
+// TARJETA DE PERFIL PRINCIPAL
+// ===================================
+.profile-card {
+  background: linear-gradient(135deg, $bancolombia-dark 0%, #2d2d2d 100%);
+  border-radius: 20px;
+  margin: 20px 16px 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  overflow: visible;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: $bancolombia-yellow;
+    border-radius: 20px 20px 0 0;
+  }
+  
+  ion-card-content {
+    padding: 24px 20px;
+  }
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.avatar-container {
+  position: relative;
+  
+  .profile-avatar {
+    width: 90px;
+    height: 90px;
+    border: 4px solid $bancolombia-yellow;
+    background: linear-gradient(135deg, #4a4a4a, #666666);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    
+    ion-icon {
+      font-size: 48px;
+      color: white;
+    }
+  }
+  
+  .edit-avatar-btn {
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    --background: $bancolombia-yellow;
+    --color: $bancolombia-dark;
+    --border-radius: 50%;
+    --padding-start: 8px;
+    --padding-end: 8px;
+    width: 36px;
+    height: 36px;
+    
+    ion-icon {
+      font-size: 18px;
+    }
+  }
+}
+
+.profile-info {
+  flex: 1;
+  
+  .profile-name {
+    margin: 0 0 4px 0;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+  
+  .profile-email {
+    margin: 0 0 12px 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+  }
+  
+  .membership-chip {
+    --background: rgba(253, 218, 36, 0.15);
+    --color: $bancolombia-yellow;
+    height: 28px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    
+    ion-icon {
+      color: $bancolombia-yellow;
+      margin-right: 4px;
+    }
+  }
+}
+
+// ===================================
+// GRID DE ESTADÍSTICAS
+// ===================================
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+.stat-card {
+  margin: 0;
+  border-radius: 16px;
+  box-shadow: $card-shadow;
+  
+  ion-card-content {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .stat-icon {
+    font-size: 32px;
+    
+    &.success {
+      color: $success-green;
+    }
+    
+    &.danger {
+      color: $danger-red;
+    }
+  }
+  
+  .stat-info {
+    flex: 1;
+    
+    .stat-label {
+      margin: 0 0 4px 0;
+      color: #666;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .stat-value {
+      margin: 0;
+      font-size: 1.3rem;
+      font-weight: 700;
+      
+      &.success {
+        color: $success-green;
+      }
+      
+      &.danger {
+        color: $danger-red;
+      }
+    }
+  }
+}
+
+// ===================================
+// TARJETA DE INFORMACIÓN PERSONAL
+// ===================================
+.info-card {
+  margin: 0 16px 16px;
+  border-radius: 16px;
+  box-shadow: $card-shadow;
+  
+  ion-card-header {
+    padding: 20px 20px 12px;
+    
+    ion-card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: $bancolombia-dark;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      
+      ion-icon {
+        font-size: 24px;
+        color: $bancolombia-yellow;
+      }
+    }
+  }
+  
+  ion-card-content {
+    padding: 0 8px 12px;
+  }
+  
+  ion-list {
+    background: transparent;
+  }
+  
+  ion-item {
+    --background: transparent;
+    --padding-start: 12px;
+    --padding-end: 12px;
+    --inner-padding-end: 0;
+    margin-bottom: 8px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      --background: rgba(253, 218, 36, 0.05);
+    }
+    
+    ion-icon[slot="start"] {
+      font-size: 24px;
+      color: $bancolombia-dark;
+      margin-right: 16px;
+    }
+    
+    ion-label {
+      p {
+        margin: 0 0 4px 0;
+        color: #999;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      
+      h3 {
+        margin: 0;
+        color: $bancolombia-text;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+    }
+    
+    ion-button {
+      --color: #999;
+      
+      &:hover {
+        --color: $bancolombia-dark;
+      }
+    }
+  }
+}
+
+// ===================================
+// TRANSACCIONES RECIENTES
+// ===================================
+.transactions-card {
+  margin: 0 16px 16px;
+  border-radius: 16px;
+  box-shadow: $card-shadow;
+  
+  ion-card-header {
+    padding: 20px 20px 12px;
+  }
+  
+  .card-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    ion-card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: $bancolombia-dark;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      
+      ion-icon {
+        font-size: 24px;
+        color: $bancolombia-yellow;
+      }
+    }
+    
+    ion-button {
+      --color: $bancolombia-dark;
+      font-size: 0.85rem;
+      font-weight: 600;
+      
+      ion-icon {
+        font-size: 16px;
+        margin-left: 4px;
+      }
+    }
+  }
+  
+  ion-card-content {
+    padding: 0 8px 12px;
+  }
+}
+
+.transaction-item {
+  --background: transparent;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    --background: rgba(0, 0, 0, 0.02);
+  }
+  
+  .transaction-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    
+    &.ingreso {
+      background: rgba(0, 208, 132, 0.1);
+      
+      ion-icon {
+        color: $success-green;
+        font-size: 24px;
+      }
+    }
+    
+    &.gasto {
+      background: rgba(255, 59, 48, 0.1);
+      
+      ion-icon {
+        color: $danger-red;
+        font-size: 24px;
+      }
+    }
+  }
+  
+  ion-label {
+    h3 {
+      margin: 0 0 4px 0;
+      color: $bancolombia-text;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    
+    p {
+      margin: 0;
+      color: #999;
+      font-size: 0.85rem;
+    }
+  }
+  
+  .transaction-amount {
+    h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 700;
+      
+      &.ingreso {
+        color: $success-green;
+      }
+      
+      &.gasto {
+        color: $danger-red;
+      }
+    }
+  }
+}
+
+.empty-state {
+  padding: 40px 20px;
+  text-align: center;
+  
+  ion-icon {
+    font-size: 64px;
+    color: $bancolombia-light-gray;
+    margin-bottom: 12px;
+  }
+  
+  p {
+    margin: 0;
+    color: #999;
+    font-size: 1rem;
+  }
+}
+
+// ===================================
+// OPCIONES ADICIONALES
+// ===================================
+.options-card {
+  margin: 0 16px 16px;
+  border-radius: 16px;
+  box-shadow: $card-shadow;
+  
+  ion-list {
+    background: transparent;
+    padding: 8px 0;
+  }
+  
+  ion-item {
+    --background: transparent;
+    --padding-start: 20px;
+    --padding-end: 20px;
+    --inner-padding-end: 0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    
+    &:hover {
+      --background: rgba(253, 218, 36, 0.05);
+    }
+    
+    ion-icon[slot="start"] {
+      font-size: 24px;
+      color: $bancolombia-dark;
+      margin-right: 16px;
+    }
+    
+    ion-label {
+      color: $bancolombia-text;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+  }
+}
+
+// ===================================
+// BOTÓN DE CERRAR SESIÓN
+// ===================================
+.logout-btn {
+  margin: 24px 16px 32px;
+  --border-radius: 14px;
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-transform: none;
+  letter-spacing: 0.3px;
+  
+  ion-icon {
+    margin-right: 8px;
+  }
+}
+
+// ===================================
+// ANIMACIONES
+// ===================================
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.profile-card {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+.stat-card {
+  animation: fadeInUp 0.4s ease-out;
+  
+  &:nth-child(1) { animation-delay: 0.1s; }
+  &:nth-child(2) { animation-delay: 0.2s; }
+}
+
+.info-card {
+  animation: fadeInUp 0.4s ease-out 0.3s;
+  animation-fill-mode: both;
+}
+
+.transactions-card {
+  animation: fadeInUp 0.4s ease-out 0.4s;
+  animation-fill-mode: both;
+}
+
+// ===================================
+// RESPONSIVE - TABLETS
+// ===================================
+@media (min-width: 768px) {
+  .profile-card,
+  .stats-grid,
+  .info-card,
+  .transactions-card,
+  .options-card,
+  .logout-btn {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .stats-grid {
+    padding: 0;
+  }
+}
+
+// ===================================
+// RESPONSIVE - MÓVILES PEQUEÑOS
+// ===================================
+@media (max-width: 360px) {
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .profile-name {
+    font-size: 1.3rem !important;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
