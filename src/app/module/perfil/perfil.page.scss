@@ -1,8 +1,4 @@
-// ===================================
-// PERFIL - ESTILOS PROFESIONALES BANCOLOMBIA
-// ===================================
 
-// Variables de color Bancolombia
 $bancolombia-yellow: #FDDA24;
 $bancolombia-dark: #1C1C1C;
 $bancolombia-gray: #F5F5F5;
@@ -13,9 +9,6 @@ $danger-red: #FF3B30;
 $info-blue: #007AFF;
 $card-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 
-// ===================================
-// HEADER
-// ===================================
 ion-header {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   
@@ -38,16 +31,10 @@ ion-header {
   }
 }
 
-// ===================================
-// CONTENIDO PRINCIPAL
-// ===================================
 ion-content {
   --background: $bancolombia-gray;
 }
 
-// ===================================
-// TARJETA DE PERFIL PRINCIPAL
-// ===================================
 .profile-card {
   background: linear-gradient(135deg, $bancolombia-dark 0%, #2d2d2d 100%);
   border-radius: 20px;
@@ -146,9 +133,6 @@ ion-content {
   }
 }
 
-// ===================================
-// GRID DE ESTADÍSTICAS
-// ===================================
 .stats-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -209,9 +193,6 @@ ion-content {
   }
 }
 
-// ===================================
-// TARJETA DE INFORMACIÓN PERSONAL
-// ===================================
 .info-card {
   margin: 0 16px 16px;
   border-radius: 16px;
@@ -290,9 +271,6 @@ ion-content {
   }
 }
 
-// ===================================
-// TRANSACCIONES RECIENTES
-// ===================================
 .transactions-card {
   margin: 0 16px 16px;
   border-radius: 16px;
@@ -427,9 +405,6 @@ ion-content {
   }
 }
 
-// ===================================
-// OPCIONES ADICIONALES
-// ===================================
 .options-card {
   margin: 0 16px 16px;
   border-radius: 16px;
@@ -466,9 +441,6 @@ ion-content {
   }
 }
 
-// ===================================
-// BOTÓN DE CERRAR SESIÓN
-// ===================================
 .logout-btn {
   margin: 24px 16px 32px;
   --border-radius: 14px;
@@ -484,9 +456,6 @@ ion-content {
   }
 }
 
-// ===================================
-// ANIMACIONES
-// ===================================
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -519,9 +488,6 @@ ion-content {
   animation-fill-mode: both;
 }
 
-// ===================================
-// RESPONSIVE - TABLETS
-// ===================================
 @media (min-width: 768px) {
   .profile-card,
   .stats-grid,
@@ -539,9 +505,6 @@ ion-content {
   }
 }
 
-// ===================================
-// RESPONSIVE - MÓVILES PEQUEÑOS
-// ===================================
 @media (max-width: 360px) {
   .profile-header {
     flex-direction: column;

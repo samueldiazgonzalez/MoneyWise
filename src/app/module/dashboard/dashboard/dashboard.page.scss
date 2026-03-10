@@ -1,9 +1,4 @@
-// ===================================
-// MONEYWISE DASHBOARD - ESTILO BANCOLOMBIA
-// Inspirado en la app de Bancolombia
-// ===================================
 
-// Variables de color Bancolombia
 $bancolombia-yellow: #FDDA24;
 $bancolombia-dark: #1C1C1C;
 $bancolombia-gray: #F5F5F5;
@@ -13,9 +8,6 @@ $success-green: #00D084;
 $danger-red: #FF3B30;
 $card-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 
-// ===================================
-// HEADER / TOOLBAR
-// ===================================
 ion-header {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   
@@ -46,18 +38,12 @@ ion-header {
   }
 }
 
-// ===================================
-// CONTENIDO PRINCIPAL
-// ===================================
 ion-content {
   --background: $bancolombia-gray;
   --padding-top: 0;
   --padding-bottom: 0;
 }
 
-// ===================================
-// TARJETAS PRINCIPALES
-// ===================================
 ion-card {
   border-radius: 16px;
   box-shadow: $card-shadow;
@@ -71,7 +57,6 @@ ion-card {
     transform: translateY(-2px);
   }
   
-  // Primera tarjeta - Saldo (destacada)
   &:first-child {
     background: linear-gradient(135deg, $bancolombia-dark 0%, #2d2d2d 100%);
     color: white;
@@ -79,7 +64,6 @@ ion-card {
     position: relative;
     overflow: hidden;
     
-    // Detalle amarillo característico
     &::before {
       content: '';
       position: absolute;
@@ -120,7 +104,6 @@ ion-card {
     }
   }
   
-  // Segunda y tercera tarjeta - Ingresos y Gastos
   &:nth-child(2),
   &:nth-child(3) {
     ion-card-header {
@@ -154,7 +137,6 @@ ion-card {
     }
   }
   
-  // Tarjeta de Ingresos (verde)
   &:nth-child(2) {
     border-left: 4px solid $success-green;
     
@@ -174,7 +156,6 @@ ion-card {
     }
   }
   
-  // Tarjeta de Gastos (roja)
   &:nth-child(3) {
     border-left: 4px solid $danger-red;
     
@@ -194,7 +175,6 @@ ion-card {
     }
   }
   
-  // Tarjeta de Gráfica
   &:nth-child(4) {
     margin-bottom: 24px;
     

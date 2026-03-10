@@ -1,0 +1,182 @@
+.detalle-content {
+  --background: #f1f5f9;
+}
+
+ion-toolbar {
+  --background: #0f172a;
+  --color: #f8fafc;
+}
+
+// Hero
+.monto-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 24px 50px;
+  background: #0f172a;
+  transition: background 0.3s;
+
+  &.ingreso { background: linear-gradient(135deg, #166534, #22c55e); }
+  &.gasto   { background: linear-gradient(135deg, #7f1d1d, #ef4444); }
+}
+
+.tipo-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.2);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+
+  ion-icon { font-size: 16px; }
+}
+
+.monto-valor {
+  color: white;
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: -2px;
+
+  .signo {
+    font-size: 32px;
+    font-weight: 300;
+    opacity: 0.8;
+  }
+}
+
+.fecha {
+  color: rgba(255,255,255,0.7);
+  font-size: 13px;
+  margin-top: 8px;
+  text-transform: capitalize;
+}
+
+// Info card
+.info-card {
+  margin: -20px 16px 16px;
+  background: white;
+  border-radius: 20px;
+  padding: 8px 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+}
+
+.info-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  ion-icon {
+    font-size: 20px;
+    color: #6366f1;
+  }
+}
+
+.info-data {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.info-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-valor {
+  font-size: 15px;
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.divider {
+  height: 1px;
+  background: #f1f5f9;
+  margin: 0 -4px;
+}
+
+// Comprobante
+.comprobante-card {
+  margin: 0 16px 16px;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+
+  img {
+    width: 100%;
+    display: block;
+  }
+}
+
+.comprobante-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  ion-icon { font-size: 16px; }
+}
+
+// Acciones
+.acciones {
+  padding: 0 16px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-editar, .btn-eliminar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 16px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  ion-icon { font-size: 20px; }
+  &:active { transform: scale(0.97); }
+}
+
+.btn-editar {
+  background: #6366f1;
+  color: white;
+  box-shadow: 0 4px 14px rgba(99,102,241,0.35);
+}
+
+.btn-eliminar {
+  background: white;
+  color: #ef4444;
+  border: 2px solid #fecaca;
+}

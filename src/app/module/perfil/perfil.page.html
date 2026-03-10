@@ -11,15 +11,17 @@
 
 <ion-content class="ion-padding">
 
-  <!-- TARJETA DE PERFIL PRINCIPAL -->
   <ion-card class="profile-card">
     <ion-card-content>
       <div class="profile-header">
         <div class="avatar-container">
           <ion-avatar class="profile-avatar">
-            <ion-icon name="person"></ion-icon>
+            <img [src]="getPhotoUrl()" alt="Foto de perfil">
           </ion-avatar>
-          <ion-button fill="clear" class="edit-avatar-btn">
+          <ion-button 
+            fill="clear" 
+            class="edit-avatar-btn"
+            (click)="changeProfilePhoto()">
             <ion-icon name="camera" slot="icon-only"></ion-icon>
           </ion-button>
         </div>
@@ -36,7 +38,6 @@
     </ion-card-content>
   </ion-card>
 
-  <!-- ESTADÍSTICAS RÁPIDAS -->
   <div class="stats-grid">
     <ion-card class="stat-card">
       <ion-card-content>
@@ -58,8 +59,6 @@
       </ion-card-content>
     </ion-card>
   </div>
-
-  <!-- INFORMACIÓN PERSONAL -->
   <ion-card class="info-card">
     <ion-card-header>
       <ion-card-title>
@@ -105,7 +104,6 @@
     </ion-card-content>
   </ion-card>
 
-  <!-- TRANSACCIONES RECIENTES -->
   <ion-card class="transactions-card">
     <ion-card-header>
       <div class="card-header-flex">
@@ -138,7 +136,6 @@
           </div>
         </ion-item>
 
-        <!-- Estado vacío -->
         <div *ngIf="transaccionesRecientes.length === 0" class="empty-state">
           <ion-icon name="receipt-outline"></ion-icon>
           <p>No hay transacciones recientes</p>
@@ -147,7 +144,6 @@
     </ion-card-content>
   </ion-card>
 
-  <!-- OPCIONES ADICIONALES -->
   <ion-card class="options-card">
     <ion-list lines="none">
       <ion-item button detail>
@@ -172,7 +168,6 @@
     </ion-list>
   </ion-card>
 
-  <!-- BOTÓN DE CERRAR SESIÓN -->
   <ion-button expand="block" color="danger" class="logout-btn" (click)="logout()">
     <ion-icon name="log-out-outline" slot="start"></ion-icon>
     Cerrar sesión

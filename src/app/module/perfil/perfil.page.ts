@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from '../../core/service/storage';
 import { TransaccionService } from '../../core/service/transaccion';
+import { CameraService } from '../../core/service/camera';
+import { ActionSheetController } from '@ionic/angular';
 import { User } from '../../core/model/user';
 import { Transaccion } from '../../core/model/transaccion';
 
@@ -13,22 +15,23 @@ import { Transaccion } from '../../core/model/transaccion';
 })
 export class PerfilPage implements OnInit {
 
-  // Información del usuario
   nombreUsuario: string = '';
   emailUsuario: string = '';
   telefono: string = '';
   fechaRegistro: string = '';
 
-  // Estadísticas
+  profilePhoto: string = '';
+
   totalIngresos: number = 0;
   totalGastos: number = 0;
 
-  // Transacciones recientes
   transaccionesRecientes: any[] = [];
 
   constructor(
     private storage: StorageService,
     private transaccionService: TransaccionService,
+    private cameraService: CameraService,
+    private actionSheetCtrl: ActionSheetController,
     private router: Router
   ) { }
 
@@ -38,7 +41,6 @@ export class PerfilPage implements OnInit {
     await this.cargarTransaccionesRecientes();
   }
 
-  // Cargar información del usuario
   async cargarDatosUsuario() {
     const session = this.storage.get('session');
     
@@ -47,13 +49,13 @@ export class PerfilPage implements OnInit {
       this.emailUsuario = session.email || 'correo@ejemplo.com';
       this.telefono = session.telefono || '';
       
-      // Calcular fecha de registro (simulada)
+      this.profilePhoto = session.profilePhoto || '';
+      
       const fecha = new Date();
       this.fechaRegistro = fecha.toLocaleDateString('es-CO', { month: 'short', year: 'numeric' });
     }
   }
 
-  // Cargar estadísticas
   async cargarEstadisticas() {
     let transacciones: Transaccion[] = 
       await this.transaccionService.getTransaccionesUsuario() || [];
@@ -72,12 +74,10 @@ export class PerfilPage implements OnInit {
     });
   }
 
-  // Cargar transacciones recientes (últimas 5)
   async cargarTransaccionesRecientes() {
     let transacciones: Transaccion[] = 
       await this.transaccionService.getTransaccionesUsuario() || [];
 
-    // Ordenar por fecha descendente y tomar las últimas 5
     this.transaccionesRecientes = transacciones
       .sort((a, b) => {
         const fechaA = new Date(a.getFecha()).getTime();
@@ -93,7 +93,103 @@ export class PerfilPage implements OnInit {
       }));
   }
 
-  // Cerrar sesión
+  async changeProfilePhoto() {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'Foto de perfil',
+      cssClass: 'custom-action-sheet',
+      buttons: [
+        {
+          text: 'Tomar foto',
+          icon: 'camera',
+          handler: () => {
+            this.takePicture();
+          }
+        },
+        {
+          text: 'Seleccionar de galería',
+          icon: 'images',
+          handler: () => {
+            this.selectFromGallery();
+          }
+        },
+        {
+          text: 'Eliminar foto',
+          icon: 'trash',
+          role: 'destructive',
+          handler: () => {
+            this.removePhoto();
+          }
+        },
+        {
+          text: 'Cancelar',
+          icon: 'close',
+          role: 'cancel'
+        }
+      ]
+    });
+
+    await actionSheet.present();
+  }
+
+  async takePicture() {
+    try {
+      let photo = await this.cameraService.takePicture();
+      
+      if (photo) {
+        photo = await this.cameraService.compressImage(photo, 0.7);
+        
+        photo = await this.cameraService.resizeImage(photo, 400, 400);
+        
+        this.saveProfilePhoto(photo);
+      }
+    } catch (error) {
+      console.error('Error al tomar foto:', error);
+    }
+  }
+
+  async selectFromGallery() {
+    try {
+      let photo = await this.cameraService.selectFromGallery();
+      
+      if (photo) {
+        photo = await this.cameraService.compressImage(photo, 0.7);
+        
+        photo = await this.cameraService.resizeImage(photo, 400, 400);
+      
+        this.saveProfilePhoto(photo);
+      }
+    } catch (error) {
+      console.error('Error al seleccionar foto:', error);
+    }
+  }
+  saveProfilePhoto(photoBase64: string) {
+  
+    this.profilePhoto = photoBase64;
+
+    const session = this.storage.get('session');
+    if (session) {
+      session.profilePhoto = photoBase64;
+      this.storage.set('session', session);
+      console.log('✅ Foto de perfil guardada');
+    }
+  }
+
+  removePhoto() {
+    this.profilePhoto = '';
+    
+    const session = this.storage.get('session');
+    if (session) {
+      session.profilePhoto = '';
+      this.storage.set('session', session);
+      console.log('🗑️ Foto de perfil eliminada');
+    }
+  }
+
+  
+  getPhotoUrl(): string {
+    return this.profilePhoto || 'assets/icon/favicon.png';
+  }
+
   logout() {
     this.storage.remove('session');
     this.router.navigate(['/auth/login']);

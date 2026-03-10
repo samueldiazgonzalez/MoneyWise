@@ -1,13 +1,94 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>detalle-transaccion</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/transacciones"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalle</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="editar()" color="primary">
+        <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="eliminar()" color="danger">
+        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">detalle-transaccion</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="detalle-content" *ngIf="transaccion">
+
+  <div class="monto-hero" [class.ingreso]="tipo === 'ingreso'" [class.gasto]="tipo === 'gasto'">
+    <div class="tipo-badge">
+      <ion-icon [name]="tipo === 'ingreso' ? 'arrow-up-circle' : 'arrow-down-circle'"></ion-icon>
+      {{ tipo | titlecase }}
+    </div>
+    <div class="monto-valor">
+      <span class="signo">{{ tipo === 'ingreso' ? '+' : '-' }}</span>
+      ${{ monto | number:'1.2-2' }}
+    </div>
+    <div class="fecha">{{ fecha | date:"EEEE, d 'de' MMMM yyyy" }}</div>
+  </div>
+
+  <div class="info-card">
+
+    <div class="info-row">
+      <div class="info-icon">
+        <ion-icon [name]="getIconoCategoria(categoria)"></ion-icon>
+      </div>
+      <div class="info-data">
+        <span class="info-label">Categoría</span>
+        <span class="info-valor">{{ categoria }}</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="info-row" *ngIf="descripcion">
+      <div class="info-icon">
+        <ion-icon name="document-text-outline"></ion-icon>
+      </div>
+      <div class="info-data">
+        <span class="info-label">Descripción</span>
+        <span class="info-valor">{{ descripcion }}</span>
+      </div>
+    </div>
+
+    <div class="divider" *ngIf="descripcion"></div>
+
+    <div class="info-row">
+      <div class="info-icon">
+        <ion-icon name="calendar-outline"></ion-icon>
+      </div>
+      <div class="info-data">
+        <span class="info-label">Fecha</span>
+        <span class="info-valor">{{ fecha | date:'dd/MM/yyyy HH:mm' }}</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="comprobante-card" *ngIf="comprobante">
+    <div class="comprobante-header">
+      <ion-icon name="camera-outline"></ion-icon>
+      <span>Comprobante</span>
+    </div>
+    <img [src]="comprobante" alt="Comprobante">
+  </div>
+
+  <div class="acciones">
+    <button class="btn-editar" (click)="editar()">
+      <ion-icon name="create-outline"></ion-icon>
+      Editar transacción
+    </button>
+    <button class="btn-eliminar" (click)="eliminar()">
+      <ion-icon name="trash-outline"></ion-icon>
+      Eliminar
+    </button>
+  </div>
+
+</ion-content>
+
+<ion-content *ngIf="!transaccion" class="ion-padding ion-text-center">
+  <p>No se encontró la transacción.</p>
+  <ion-button routerLink="/tabs/transacciones">Volver</ion-button>
 </ion-content>

@@ -1,72 +1,88 @@
-<ion-header>
+<ion-header class="header-custom">
   <ion-toolbar>
-    <ion-title>Nueva Transacción</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/transacciones"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ idEditar ? 'Editar' : 'Nueva' }} Transacción</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="form-content">
 
-<ion-item>
-  <ion-label>Tipo</ion-label>
-  <ion-segment [(ngModel)]="tipo">
-    <ion-segment-button value="ingreso">
+  <div class="tipo-selector">
+    <button class="tipo-btn" [class.active-ingreso]="tipo === 'ingreso'" (click)="tipo = 'ingreso'">
+      <ion-icon name="arrow-up-circle-outline"></ion-icon>
       Ingreso
-    </ion-segment-button>
-    <ion-segment-button value="gasto">
+    </button>
+    <button class="tipo-btn" [class.active-gasto]="tipo === 'gasto'" (click)="tipo = 'gasto'">
+      <ion-icon name="arrow-down-circle-outline"></ion-icon>
       Gasto
-    </ion-segment-button>
-  </ion-segment>
-</ion-item>
+    </button>
+  </div>
 
-<ion-item>
-  <ion-label>Categoría</ion-label>
+  <div class="monto-hero" [class.ingreso]="tipo === 'ingreso'" [class.gasto]="tipo === 'gasto'">
+    <span class="currency-symbol">$</span>
+    <input
+      type="number"
+      class="monto-input"
+      placeholder="0.00"
+      [(ngModel)]="monto"
+      inputmode="decimal">
+  </div>
 
-  <ion-select [(ngModel)]="categoria" placeholder="Selecciona">
+  <div class="card-form">
 
-    <ion-select-option
-      *ngFor="let c of categorias"
-      [value]="c">
+    <div class="form-group">
+      <label class="form-label">
+        <ion-icon name="grid-outline"></ion-icon> Categoría
+      </label>
+      <ion-select
+        [(ngModel)]="categoria"
+        placeholder="Selecciona una categoría"
+        interface="action-sheet"
+        class="custom-select">
+        <ion-select-option *ngFor="let c of categorias" [value]="c">{{c}}</ion-select-option>
+      </ion-select>
+    </div>
 
-      {{c}}
+    <div class="form-group">
+      <label class="form-label">
+        <ion-icon name="document-text-outline"></ion-icon> Descripción
+      </label>
+      <ion-textarea
+        placeholder="¿En qué gastaste o ingresaste? (opcional)"
+        [(ngModel)]="descripcion"
+        rows="3"
+        class="custom-textarea">
+      </ion-textarea>
+    </div>
 
-    </ion-select-option>
+    <div class="comprobante-section">
+      <label class="form-label">
+        <ion-icon name="camera-outline"></ion-icon> Comprobante
+      </label>
 
-  </ion-select>
+      <div class="foto-preview" *ngIf="comprobante" (click)="tomarFoto()">
+        <img [src]="comprobante" alt="Comprobante">
+        <div class="foto-overlay">
+          <ion-icon name="camera-outline"></ion-icon>
+          <span>Cambiar foto</span>
+        </div>
+      </div>
 
-</ion-item>
+      <button class="btn-foto" *ngIf="!comprobante" (click)="tomarFoto()">
+        <ion-icon name="camera-outline"></ion-icon>
+        <span>Agregar comprobante</span>
+      </button>
+    </div>
 
-<ion-item>
-  <ion-input
-    type="number"
-    label="Monto"
-    placeholder="0"
-    [(ngModel)]="monto">
-  </ion-input>
-</ion-item>
+  </div>
 
-<ion-item>
-  <ion-textarea
-    label="Descripción"
-    placeholder="Opcional"
-    [(ngModel)]="descripcion">
-  </ion-textarea>
-</ion-item>
-
-<ion-item>
-  <ion-button expand="block" (click)="tomarFoto()">
-
-  <ion-icon slot="start" name="camera"></ion-icon>
-  Agregar comprobante
-
-</ion-button>
-</ion-item>
-<img
-  *ngIf="comprobante"
-  [src]="comprobante"
-  style="width:100%; margin-top:10px; border-radius:10px;">
-
-<ion-button expand="block" color="success" (click)="guardar()">
-  Guardar Transacción
-</ion-button>
+  <div class="footer-actions">
+    <button class="btn-guardar" [class.ingreso]="tipo === 'ingreso'" [class.gasto]="tipo === 'gasto'" (click)="guardar()">
+      <ion-icon name="checkmark-circle-outline"></ion-icon>
+      {{ idEditar ? 'Actualizar' : 'Guardar' }} Transacción
+    </button>
+  </div>
 
 </ion-content>
